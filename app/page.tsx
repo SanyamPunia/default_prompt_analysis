@@ -22,7 +22,6 @@ export default function Home() {
   const [jsonResponse, setJsonResponse] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [machineName, setMachineName] = useState<string>("");
-  const [userSteps, setUserSteps] = useState<string[]>([]);
 
   const handleMachineNameChange = (
     event: React.ChangeEvent<HTMLInputElement>
@@ -97,7 +96,6 @@ export default function Home() {
     setResponse("");
     setJsonResponse("");
     const steps = generateSteps(machineName);
-    setUserSteps(steps);
 
     let responseText = "";
     const jsonResponseObj: any = {};
