@@ -100,8 +100,8 @@ export default function Home() {
     setUserSteps(steps);
 
     let responseText = "";
-    let jsonResponseObj: any = {};
-    for (let step of steps) {
+    const jsonResponseObj: any = {};
+    for (const step of steps) {
       const stepResponse = await getStepResponse(step);
       responseText += `## ${step}\n\n${stepResponse.markdown}\n\n`;
       jsonResponseObj[step.replace(/^Step \d+: /, "")] = stepResponse.json;
