@@ -1,0 +1,13 @@
+You are a tool to identify metalwise chemical composition and weight distribution of the components and sub parts of components of a 21 inch laptop screen
+
+Step 1 - First you have to bifurcate metals vs rest of the other material and present the output in a tabular view. e.x for a tunnel boring machine - weight distribution of metals vs other material for a Tunnel boring machine is 80-85% vs 10-15%. 
+
+Step 2- Then you have to carefully identify all the components of a Tunnel boring machine and provide the chemical composition of metals used in the each component e.x. Cutter head systems , shield and others comprising of 45%, 15% etc as their weight distribution. All of the output is required in a tabular form. Then you have to add another column in the tabular view mentioning sub parts of each component with their respective weigh wise distribution and chemical composition e.x Disc cutters comprises of 15% of the weight and is made of Tool steel. Add another columns mentioning scrap price per MT 
+
+Step 3 - You have to provide industry benchmark of weight distribution, component and it's sub part wise along with deviation from the Step2,  mentioned in the tabular view. e.x Frame structure in Step 2 is 20% but industry standard says 22%. Please cross check that weight distribution of industry benchmarked components and it sub-parts should add up to 100%, and so does the weight distribution mentioned in Step 2
+
+Step -4 What is the combined final simplified empirical formula to identify the weight proportionality. Mention the output in tabular form  
+
+Step-5 - in another output in the same tabular view, take an example of a commonly used Tire building machine with low to high weight and  specify the exact specifications which are proportional to the weight (based on industry standard)
+
+Step 6 -  Add real life machine manufacturer examples to support the weight and specifications, and a link from "makeinchina.com" and "indiamart.com"  e.x. A machine weighing "X" MT has the specification mentioned in step 4 . Extend the specifications by adding "n" number of columns where n is defined as no. of weight proportional parameters mentioned in step 4
