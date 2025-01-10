@@ -7,19 +7,20 @@ import { Button } from "@/components/ui/button";
 import { marked } from "marked";
 import { Input } from "@/components/ui/input";
 
+// Define a more specific type for the response JSON structure
+interface StepResponse {
+  markdown: string;
+  json: Record<string, unknown>;
+}
+
 const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
   dangerouslyAllowBrowser: true,
 });
 
-interface StepResponse {
-  markdown: string;
-  json: any;
-}
-
 export default function Home() {
-  const [response, setResponse] = useState<string | Promise<string>>("");
-  const [jsonResponse, setJsonResponse] = useState<string>("");
+  const [response, setResponse] = useState<string | Promise<string>>(""); // Changed type to string | null
+  const [jsonResponse, setJsonResponse] = useState<string>(""); // Keeping this as string
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [machineName, setMachineName] = useState<string>("");
 
@@ -29,7 +30,7 @@ export default function Home() {
     setMachineName(event.target.value);
   };
 
-  const generateSteps = (machineName: string) => {
+  const generateSteps = (machineName: string): string[] => {
     return [
       `Step 1: Provide a detailed breakdown of metals vs other materials for a ${machineName}, 6600 mm diameter. Include specific alloys, their properties, and why they're chosen. Present this information in a comprehensive table.`,
       `Step 2: Identify all components of the ${machineName} and provide an in-depth analysis of the chemical composition of metals used in each component. Include percentages of each element and explain their purpose. Present this in a detailed tabular form.`,
@@ -58,7 +59,7 @@ export default function Home() {
 
       const content =
         result.choices[0].message.content || "No response generated.";
-      let jsonContent = {};
+      let jsonContent: Record<string, unknown> = {}; // Changed to a more specific type
       let markdownContent = content;
 
       try {
@@ -86,19 +87,19 @@ export default function Home() {
     }
   }
 
-  const handleGenerateResponse = async () => {
+  const handleGenerateResponse = async (): Promise<void> => {
     if (!machineName.trim()) {
       alert("Please enter a machine name.");
       return;
     }
 
     setIsLoading(true);
-    setResponse("");
+    setResponse(""); // Setting response to null initially
     setJsonResponse("");
     const steps = generateSteps(machineName);
 
     let responseText = "";
-    const jsonResponseObj: any = {};
+    const jsonResponseObj: Record<string, Record<string, unknown>> = {}; // More specific type
     for (const step of steps) {
       const stepResponse = await getStepResponse(step);
       responseText += `## ${step}\n\n${stepResponse.markdown}\n\n`;
