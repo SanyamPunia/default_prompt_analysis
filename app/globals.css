@@ -71,7 +71,6 @@ body {
   }
 }
 
-/* App.css */
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -88,7 +87,6 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Styling for headings */
 h2 {
   font-size: 2rem;
   color: #333;
@@ -97,7 +95,6 @@ h2 {
   margin-bottom: 20px;
 }
 
-/* Styling for tables */
 table {
   width: 100%;
   border-collapse: collapse;
@@ -124,7 +121,6 @@ table tr:hover {
   background-color: #f1f1f1;
 }
 
-/* Code blocks */
 pre,
 code {
   background-color: #282c34;
@@ -134,13 +130,52 @@ code {
   font-family: "Courier New", monospace;
 }
 
-/* Lists */
 ul {
   padding-left: 20px;
+  list-style-type: disc;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #333;
 }
 
 ul li {
-  margin-bottom: 5px;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+ol {
+  padding-left: 20px;
+  list-style-type: decimal;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #333;
+}
+
+ol li {
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+  margin-left: 20px;
+}
+
+ul ul li,
+ol ul li {
+  list-style-type: circle;
+}
+
+ul ol li,
+ol ol li {
+  list-style-type: lower-roman;
+}
+
+ul ul ul,
+ol ol ol {
+  margin-left: 30px;
 }
 
 blockquote {
@@ -148,10 +183,53 @@ blockquote {
   background-color: #f9f9f9;
   border-left: 5px solid #0077b6;
   margin: 20px 0;
+  font-style: italic;
+  color: #555;
 }
 
 hr {
   border: 0;
   border-top: 2px solid #0077b6;
   margin: 30px 0;
+}
+
+input[type="checkbox"] {
+  accent-color: #0077b6;
+  margin-right: 10px;
+}
+
+ul li a,
+ol li a {
+  color: #0077b6;
+  text-decoration: none;
+}
+
+ul li a:hover,
+ol li a:hover {
+  text-decoration: underline;
+}
+
+ol li {
+  padding-left: 10px;
+  margin-bottom: 12px;
+}
+
+ul li code,
+ol li code {
+  background-color: #f0f0f0;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+ul li,
+ol li {
+  padding-left: 10px;
+  line-height: 1.6;
+}
+
+ul li::before,
+ol li::before {
+  content: "";
+  margin-right: 10px;
 }

@@ -2,28 +2,37 @@
 
 import { useState } from "react";
 import OpenAI from "openai";
-import ReactMarkdown from "react-markdown";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { marked } from "marked";
-
+import { Input } from "@/components/ui/input";
 const openai = new OpenAI({
   apiKey: process.env.NEXT_PUBLIC_OPENAI_API_KEY,
   dangerouslyAllowBrowser: true,
 });
 
-const steps: string[] = [
-  "Step 1: Bifurcate metals vs other materials for a Tunnel boring machine, 6600 mm diameter and present it in a table.",
-  "Step 2: Identify components of the Tunnel Boring Machine and provide chemical composition of metals used in each component. Present it in a tabular form.",
-  "Step 3: Provide the industry benchmark of weight distribution, component-wise, and deviation from the previous step.",
-  "Step 4: Combine final simplified empirical formula to identify weight proportionality.",
-  "Step 5: Provide specifications of a commonly used tire building machine with weight proportionality.",
-  "Step 6: Add real-life machine manufacturer examples and links from 'makeinchina.com' and 'indiamart.com'.",
-];
-
 export default function Home() {
   const [response, setResponse] = useState<string | Promise<string>>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [machineName, setMachineName] = useState<string>("");
+  const [userSteps, setUserSteps] = useState<string[]>([]);
+
+  const handleMachineNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setMachineName(event.target.value);
+  };
+
+  const generateSteps = (machineName: string) => {
+    return [
+      `Step 1: Bifurcate metals vs other materials for a ${machineName} Tunnel boring machine, 6600 mm diameter and present it in a table.`,
+      `Step 2: Identify components of the ${machineName} Tunnel Boring Machine and provide chemical composition of metals used in each component. Present it in a tabular form.`,
+      `Step 3: Provide the industry benchmark of weight distribution, component-wise, and deviation from the previous step.`,
+      `Step 4: Combine final simplified empirical formula to identify weight proportionality.`,
+      `Step 5: Provide specifications of a commonly used tire building machine with weight proportionality.`,
+      `Step 6: Add real-life machine manufacturer examples and links from 'makeinchina.com' and 'indiamart.com'.`,
+    ];
+  };
 
   async function getStepResponse(step: string): Promise<string> {
     try {
@@ -49,11 +58,17 @@ export default function Home() {
   }
 
   const handleGenerateResponse = async () => {
+    if (!machineName.trim()) {
+      alert("Please enter a machine name.");
+      return;
+    }
+
     setIsLoading(true);
     setResponse("");
+    setUserSteps(generateSteps(machineName));
 
     let responseText = "";
-    for (let step of steps) {
+    for (let step of userSteps) {
       const stepResponse = await getStepResponse(step);
       responseText += `## ${step}\n\n${stepResponse}\n\n`;
     }
@@ -68,10 +83,21 @@ export default function Home() {
       <Card className="w-full max-w-4xl">
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-center">
-            Tunnel Boring Machine Analysis
+            Machine Analysis
           </CardTitle>
         </CardHeader>
         <CardContent>
+          {/* Input field for machine name */}
+          <div className="mb-4">
+            <Input
+              type="text"
+              value={machineName}
+              onChange={handleMachineNameChange}
+              placeholder="Enter Machine Name"
+              className="w-full p-3 border rounded-md"
+            />
+          </div>
+
           <Button
             onClick={handleGenerateResponse}
             disabled={isLoading}
